@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElectroLands</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+        }
+
+        /* HEADER SECTION - Top navigation bar */
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ee5ddb;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: #ee5ddb;
+        }
+
+        /* HERO SECTION - Main background area */
+        .hero {
+            height: 100vh;
+            background-image: url('https://images.wallpaperscraft.ru/image/single/molniia_groza_oblaka_172512_2560x1440.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 60px;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
+        }
+
+        .hero p {
+            font-size: 24px;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .server-ip {
+            background-color: rgba(150, 14, 98, 0.9);
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 22px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .join-button {
+            background-color: #755fc2;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .join-button:hover {
+            background-color: #755fc2;
+            transform: scale(1.05);
+        }
+
+        /* CONTENT SECTIONS - For different pages */
+        .content-section {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 40px 20px;
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .content-section h2 {
+            font-size: 42px;
+            margin-bottom: 30px;
+            color: #ee5ddb;
+            text-align: center;
+        }
+
+        .content-section p, .content-section ul {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .content-section ul {
+            list-style-position: inside;
+            padding-left: 20px;
+        }
+
+        .content-section li {
+            margin-bottom: 10px;
+        }
+
+        /* YOUTUBERS SECTION - Bottom circles */
+        .youtubers-section {
+            background-color: #2a2a2a;
+            padding: 60px 20px;
+            margin-top: 80px;
+        }
+
+        .youtubers-section h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: #ee5ddb;
+        }
+
+        .youtubers-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 40px;
+            justify-items: center;
+        }
+
+        .youtuber {
+            text-align: center;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .youtuber:hover {
+            transform: translateY(-10px);
+        }
+
+        .youtuber-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 15px;
+            border: 4px solid #ee5ddb;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .youtuber-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .youtuber-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .youtuber-subs {
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: #1a1a1a;
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 2px solid #ee5ddb;
+        }
+
+        footer p {
+            color: #aaa;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION BAR -->
+    <header>
+        <nav>
+            <div class="logo">⛏️ ElectroLands</div>
+            <ul class="nav-links">
+                <li><a onclick="showSection('home')">Home</a></li>
+                <li><a onclick="showSection('wiki')">Wiki</a></li>
+                <li><a onclick="showSection('rules')">Rules</a></li>
+                <li><a onclick="showSection('shop')">Shop</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- MAIN HERO SECTION (HOME PAGE) -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Welcome to ElectroLands</h1>
+            <p>You will become a real vanilla lover!</p>
+            <div class="server-ip">play.electroLands.com</div>
+            <button class="join-button">Join Now</button>
+        </div>
+    </section>
+
+    <!-- WIKI PAGE -->
+    <section id="wiki" class="content-section">
+        <h2>📚 Server Wiki</h2>
+        <p>Welcome to our server wiki! Here you'll find everything you need to know about our server.</p>
+        
+        <h3 style="color: hsl(278, 91%, 48%); margin-top: 30px; font-size: 28px;">Getting Started</h3>
+        <p>When you first join the server, you'll spawn in the main hub. From there, you can explore different game modes and areas.</p>
+        
+        <h3 style="color: #ee5ddb; margin-top: 30px; font-size: 28px;">Game Modes</h3>
+        <ul>
+            <li><strong>Survival:</strong> Classic Minecraft survival with custom features</li>
+            <li><strong>Creative:</strong> Build anything you can imagine</li>
+            <li><strong>Minigames:</strong> Various fun minigames to play with friends</li>
+            <li><strong>Skyblock:</strong> Z THIS IS BAD</li>
+        </ul>
+        
+        <h3 style="color: #ee5ddb; margin-top: 30px; font-size: 28px;">Custom Features</h3>
+        <p>Our server has many custom features including custom items, special events, and unique mechanics that you won't find anywhere else!</p>
+    </section>
+
+    <!-- RULES PAGE -->
+    <section id="rules" class="content-section">
+        <h2>📜 Server Rules</h2>
+        <p>Please read and follow these rules to keep our community fun and safe for everyone.</p>
+        
+        <ul style="margin-top: 30px;">
+            <li><strong>Rule 1:</strong> Be respectful to all players and staff members</li>
+            <li><strong>Rule 2:</strong> No griefing or destroying other players' builds</li>
+            <li><strong>Rule 3:</strong> No cheating, hacking, or using exploits</li>
+            <li><strong>Rule 4:</strong> No spamming in chat or advertising other servers</li>
+            <li><strong>Rule 5:</strong> Keep chat family-friendly and appropriate</li>
+            <li><strong>Rule 6:</strong> Follow staff instructions at all times</li>
+            <li><strong>Rule 7:</strong> No stealing from other players</li>
+            <li><strong>Rule 8:</strong> Report bugs and issues to staff instead of exploiting them</li>
+        </ul>
+        
+        <p style="margin-top: 30px; color: #5d2d6b; font-weight: bold;">Breaking these rules may result in warnings, temporary bans, or permanent bans depending on the severity.</p>
+    </section>
+
+    <!-- SHOP PAGE -->
+    <section id="shop" class="content-section">
+        <h2>🛒 Server Shop</h2>
+        <p>Support the server and get awesome perks! All purchases help keep the server running smoothly.</p>
+        
+        <h3 style="color: #ee5ddb; margin-top: 30px; font-size: 28px;">Ranks</h3>
+        <ul>
+            <li><strong>VIP Rank:</strong> $5 - Special prefix, extra homes, and access to VIP chat</li>
+            <li><strong>MVP Rank:</strong> $10 - All VIP perks plus exclusive cosmetics and commands</li>
+            <li><strong>Legend Rank:</strong> $20 - All previous perks plus priority support and special events</li>
+        </ul>
+        
+        <p style="margin-top: 30px;">Visit our store at: <strong style="color: #ee5ddb;">store.myserver.com</strong></p>
+    </section>
+
+    <!-- YOUTUBERS SECTION -->
+    <section class="youtubers-section">
+        <h2>🎥 Our Content Creators</h2>
+        <div class="youtubers-grid">
+            <!-- YouTuber 1 -->
+            <div class="youtuber">
+                <div class="youtuber-circle">
+                    <img src="https://yt3.googleusercontent.com/lGaY-RQ-DDvKZI7OtNvrbJaZRWhN5pMRmTLPJ3MEbQk1FVdT-q-R_IsaFowtuMISM4aGPAPa=s900-c-k-c0x00ffffff-no-rj" alt="YouTuber 1">
+                </div>
+                <div class="Dream">Dream</div>
+                <div class="youtuber-subs">40M Subscribers</div>
+            </div>
+
+            <!-- YouTuber 2 -->
+            <div class="youtuber">
+                <div class="youtuber-circle">
+                    <img src="https://cojo.ru/wp-content/uploads/2022/11/sviti-foks-kosplei-1.webp" alt="YouTuber 2">
+                </div>
+                <div class="youtuber-name">Sweetie Fox</div>
+                <div class="youtuber-subs">999K Subscribers</div>
+            </div>
+
+            <!-- YouTuber 3 -->
+            <div class="youtuber">
+                <div class="youtuber-circle">
+                    <img src="https://i.ytimg.com/vi/3cCiAMsuQAc/oardefault.jpg?sqp=-oaymwEYCJUDENAFSFqQAgHyq4qpAwcIARUAAIhC&rs=AOn4CLAYL0lq0nuNtS80LJwgg9tRp5Jzyg" alt="YouTuber 3">
+                </div>
+                <div class="youtuber-name">5opka</div>
+                <div class="youtuber-subs">42T Subscribers</div>
+            </div>
+
+            <!-- YouTuber 4 -->
+            <div class="youtuber">
+                <div class="youtuber-circle">
+                    <img src="https://i.scdn.co/image/ab67616d0000b2733b6cf7d374564e85339a1225" alt="YouTuber 4">
+                </div>
+                <div class="youtuber-name">Oxxxymiron</div>
+                <div class="youtuber-subs">2,14M Subscribers</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2025 MY SERVER ElectroLands. All rights reserved.</p>
+        <p>Made with ❤️ for the Minecraft community</p>
+    </footer>
+
+    <script>
+        // Function to show different sections
+        function showSection(sectionId) {
+            // Hide all content sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Hide hero section
+            const hero = document.getElementById('home');
+            
+            if (sectionId === 'home') {
+                hero.style.display = 'flex';
+            } else {
+                hero.style.display = 'none';
+                document.getElementById(sectionId).classList.add('active');
+                window.scrollTo(0, 0);
+            }
+        }
+
+        // Show home page by default
+        showSection('home');
+    </script>
+</body>
+</html>
